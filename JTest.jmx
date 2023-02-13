@@ -25,7 +25,7 @@
           </elementProp>
           <elementProp name="BASE_URL_3" elementType="Argument">
             <stringProp name="Argument.name">BASE_URL_3</stringProp>
-            <stringProp name="Argument.value">api-feature-development.gandiva.ru</stringProp>
+            <stringProp name="Argument.value">${__P(BASE_URL_3,api-feature-development.gandiva.ru)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="ACCESS_TOKEN" elementType="Argument">
@@ -46,6 +46,26 @@
           <elementProp name="USERNAME" elementType="Argument">
             <stringProp name="Argument.name">USERNAME</stringProp>
             <stringProp name="Argument.value">SystemOperator</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="NUMBER_USERS" elementType="Argument">
+            <stringProp name="Argument.name">NUMBER_USERS</stringProp>
+            <stringProp name="Argument.value">${__P(NUMBER_USERS,1)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="RAMPART_SEC" elementType="Argument">
+            <stringProp name="Argument.name">RAMPART_SEC</stringProp>
+            <stringProp name="Argument.value">${__P(RAMPART_SEC,1)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="TIMEOUT_CONNECT" elementType="Argument">
+            <stringProp name="Argument.name">TIMEOUT_CONNECT</stringProp>
+            <stringProp name="Argument.value">3000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="TIMEOUT_RESPONSE" elementType="Argument">
+            <stringProp name="Argument.name">TIMEOUT_RESPONSE</stringProp>
+            <stringProp name="Argument.value">20000</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -76,14 +96,28 @@
         </collectionProp>
       </HeaderManager>
       <hashTree/>
+      <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+        <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments"/>
+        </elementProp>
+        <stringProp name="HTTPSampler.domain"></stringProp>
+        <stringProp name="HTTPSampler.port"></stringProp>
+        <stringProp name="HTTPSampler.protocol"></stringProp>
+        <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+        <stringProp name="HTTPSampler.path"></stringProp>
+        <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+        <stringProp name="HTTPSampler.connect_timeout">${TIMEOUT_CONNECT}</stringProp>
+        <stringProp name="HTTPSampler.response_timeout">${TIMEOUT_RESPONSE}</stringProp>
+      </ConfigTestElement>
+      <hashTree/>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <stringProp name="LoopController.loops">1</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">1</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${NUMBER_USERS}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${RAMPART_SEC}</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration">0</stringProp>
         <stringProp name="ThreadGroup.delay">0</stringProp>
@@ -191,7 +225,7 @@
             <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
             <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
             <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout">60000</stringProp>
           </HTTPSamplerProxy>
           <hashTree>
             <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
@@ -1352,7 +1386,7 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename"></stringProp>
+          <stringProp name="filename">C:\Trash\JResult.jtl</stringProp>
         </ResultCollector>
         <hashTree/>
       </hashTree>
